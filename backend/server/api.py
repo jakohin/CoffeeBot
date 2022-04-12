@@ -1,16 +1,16 @@
 from fastapi import FastAPI
-from paho.mqtt import client
 import json
+
+from backend.util.mqtt_client import get_client
 
 
 app = FastAPI()
 
-client = client.Client()
+client = get_client()
 client.connect("192.168.1.113")
 
 
 def on_message(*args, **kwargs):
-
     pass
 
 

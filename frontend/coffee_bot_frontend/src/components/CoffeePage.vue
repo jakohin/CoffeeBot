@@ -1,5 +1,5 @@
 <template>
-  <button class="coffee-circle circle" @click="orderCoffee">Get Coffee</button>
+  <button class="coffee-circle circle" @click="orderCoffee">Get Coffee<div class="coffee"></div></button>
 </template>
 
 <script>

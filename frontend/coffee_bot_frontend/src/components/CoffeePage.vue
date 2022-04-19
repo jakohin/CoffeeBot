@@ -84,6 +84,10 @@ export default {
   font-family: 'Raleway', sans-serif;
 }
 
+.coffee-circle:hover {
+  cursor: pointer;
+}
+
 
 .coffee-circle::after, .coffee-circle:before {
   content: "";

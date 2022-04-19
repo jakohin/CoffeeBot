@@ -1,5 +1,7 @@
 <template>
-  <button class="coffee-circle circle" v-bind:class="{animated: coffeeCircleAnimated}" @click="orderCoffee">Coffee's coming!</button>
+  <button class="coffee-circle circle" v-bind:class="{animated: coffeeCircleAnimated}" @click="orderCoffee">
+      <div id="coffee-circle-text" v-bind:class="{animated: coffeeCircleAnimated}">{{ coffeeCircleMessage }}</div>
+  </button>
 </template>
 
 <script>
@@ -10,6 +12,8 @@ export default {
   data: function () {
     return {
       coffeeCircleAnimated: false,
+      coffeeCircleMessage: "Order Coffee",
+      activeColor: "black",
     }
   },
   methods: {
@@ -27,6 +31,14 @@ export default {
             console.log(error)
           })
     }
+  },
+  mounted() {
+    const coffeeText = document.getElementById('coffee-circle-text')
+    coffeeText.addEventListener('animationend', () => {
+      console.log("yeet")
+      coffeeText.style.color = "white"
+      coffeeText.innerHTML = "Coffee's coming!"
+    })
   }
 }
 </script>
@@ -50,9 +62,19 @@ export default {
   --coffee-lighter: #FFECB5;
 }
 
+#coffee-circle-text {
+  z-index: 1;
+  position: relative;
+  color: black;
+}
+
+#coffee-circle-text.animated{
+  animation: move-up 1s ease-in;
+}
+
 .coffee-circle {
-  width: 30vh;
-  height: 30vh;
+  width: 32vh;
+  height: 32vh;
   border: #C6AF71 solid 2px;
   background-color: #B39C5B;
   position: relative;
@@ -68,7 +90,6 @@ export default {
   height: 200%;
   width: 200%;
   position: absolute;
-  bottom: -10%;
   left: -50%;
   background: white;
   border-radius: 45%;
@@ -78,6 +99,13 @@ export default {
   background: #C6AF71;
   bottom: -35%;
   transform: rotate(45deg);
+}
+
+.coffee-circle:after {
+  bottom: -10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -113,4 +141,14 @@ export default {
 .circle {
   border-radius: 50%;
 }
+
+@keyframes move-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-32vh);
+  }
+}
+
 </style>
